@@ -2,7 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Somali Qaraami Music</title>
+  <title>Somali Qaraami – magool</title>
+
+  <script>
+    let playerStarted = false;
+
+    function startMusic() {
+      if (!playerStarted) {
+        document.getElementById("player").src =
+          "https://www.youtube.com/embed?listType=playlist&list=PLSyveoqQBiuULjtZHeQwvNZ1dJVoCNZgf&autoplay=1";
+        playerStarted = true;
+      }
+      document.getElementById("controls").style.display = "block";
+    }
+
+    function pauseMusic() {
+      document.getElementById("player").contentWindow.postMessage(
+        '{"event":"command","func":"pauseVideo","args":""}', '*');
+    }
+
+    function playMusic() {
+      document.getElementById("player").contentWindow.postMessage(
+        '{"event":"command","func":"playVideo","args":""}', '*');
+    }
+  </script>
 </head>
 
 <body style="
@@ -12,51 +35,54 @@
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  min-height:100vh;
-  padding:20px;
+  height:100vh;
+  font-family:Arial;
 ">
 
-  <!-- COVER IMAGE -->
-  <img
-    src="somali-radio-music-cover.png"
-    alt="Somali Qaraami Music 24/7"
-    style="width:320px; border-radius:16px; margin-bottom:20px;"
+  <!-- SOMALI BLUE PLAY SCREEN -->
+  <div
+    onclick="startMusic()"
+    style="
+      width:320px;
+      height:320px;
+      border-radius:20px;
+      background:#4189dd;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      cursor:pointer;
+      box-shadow:0 0 25px rgba(0,0,0,0.3);
+      text-align:center;
+    "
   >
+    <h1 style="color:white; margin:0;">magool</h1>
+    <p style="color:white; margin-top:10px;">
+      ▶ Play All Qaraami Songs
+    </p>
+  </div>
 
-  <h2 style="color:white; font-family:Arial;">
-    Somali Qaraami Playlist 1
-  </h2>
+  <!-- CONTROLS -->
+  <div id="controls" style="display:none; margin-top:20px;">
+    <button onclick="playMusic()" style="margin-right:10px;">▶ Play</button>
+    <button onclick="pauseMusic()">⏸ Pause</button>
+  </div>
 
-  <!-- PLAYLIST 1 -->
+  <!-- HIDDEN YOUTUBE PLAYER -->
   <iframe
-    width="320"
-    height="180"
-    src="https://www.youtube.com/embed/videoseries?list=PLSyveoqQBiuULjtZHeQwvNZ1dJVoCNZgf"
+    id="player"
+    width="1"
+    height="1"
+    style="display:none;"
+    src=""
     frameborder="0"
     allow="autoplay; encrypted-media"
     allowfullscreen>
   </iframe>
-
-  <h2 style="color:white; font-family:Arial; margin-top:30px;">
-    Somali Qaraami Playlist 2
-  </h2>
-
-  <!-- PLAYLIST 2 -->
-  <iframe
-    width="320"
-    height="180"
-    src="https://www.youtube.com/embed/videoseries?list=PLsMCjY-boR9uNpD5YXG4J28DrC_OSJ_08"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
-
-  <p style="color:white; font-family:Arial; margin-top:20px;">
-    Click ▶️ to start listening
-  </p>
 
 </body>
 </html>
+
 
 
 
