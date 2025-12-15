@@ -2,28 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Somali Qaraami – magool</title>
+  <title>Magool – Somali Qaraami</title>
 
   <script>
-    let playerStarted = false;
-
-    function startMusic() {
-      if (!playerStarted) {
-        document.getElementById("player").src =
-          "https://www.youtube.com/embed?listType=playlist&list=PLSyveoqQBiuULjtZHeQwvNZ1dJVoCNZgf&autoplay=1";
-        playerStarted = true;
-      }
-      document.getElementById("controls").style.display = "block";
-    }
-
-    function pauseMusic() {
-      document.getElementById("player").contentWindow.postMessage(
-        '{"event":"command","func":"pauseVideo","args":""}', '*');
-    }
-
-    function playMusic() {
-      document.getElementById("player").contentWindow.postMessage(
-        '{"event":"command","func":"playVideo","args":""}', '*');
+    function startMagool() {
+      const iframe = document.getElementById("ytplayer");
+      iframe.src =
+        "https://www.youtube.com/embed?listType=playlist&list=PLLmXWQTH4wCUuFffBNFV9CJW7j3W4jceo&autoplay=1";
+      document.getElementById("cover").style.display = "none";
     }
   </script>
 </head>
@@ -32,16 +18,16 @@
   margin:0;
   background:#4189dd;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   height:100vh;
   font-family:Arial;
 ">
 
-  <!-- SOMALI BLUE PLAY SCREEN -->
+  <!-- SOMALI BLUE IMAGE / BUTTON -->
   <div
-    onclick="startMusic()"
+    id="cover"
+    onclick="startMagool()"
     style="
       width:320px;
       height:320px;
@@ -52,29 +38,22 @@
       justify-content:center;
       align-items:center;
       cursor:pointer;
-      box-shadow:0 0 25px rgba(0,0,0,0.3);
+      box-shadow:0 0 25px rgba(0,0,0,0.35);
       text-align:center;
     "
   >
     <h1 style="color:white; margin:0;">magool</h1>
-    <p style="color:white; margin-top:10px;">
-      ▶ Play All Qaraami Songs
+    <p style="color:white; margin-top:12px;">
+      ▶ Play All Songs
     </p>
   </div>
 
-  <!-- CONTROLS -->
-  <div id="controls" style="display:none; margin-top:20px;">
-    <button onclick="playMusic()" style="margin-right:10px;">▶ Play</button>
-    <button onclick="pauseMusic()">⏸ Pause</button>
-  </div>
-
-  <!-- HIDDEN YOUTUBE PLAYER -->
+  <!-- HIDDEN YOUTUBE PLAYER (AUDIO ONLY) -->
   <iframe
-    id="player"
+    id="ytplayer"
     width="1"
     height="1"
     style="display:none;"
-    src=""
     frameborder="0"
     allow="autoplay; encrypted-media"
     allowfullscreen>
@@ -82,6 +61,7 @@
 
 </body>
 </html>
+
 
 
 
